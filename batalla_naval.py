@@ -11,12 +11,13 @@ def jugar():
 
 
 while True:
-    opcion = input()
 
     print("Escoga una opcion")
     print("a)carga de archivos")
     print("b)jugar")
     print("c)terminar")
+    
+    opcion = input()
 
     if opcion == "a":
         cargar()

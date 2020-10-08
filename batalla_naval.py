@@ -1,6 +1,5 @@
 opcion = ""
 
-
 def cordenadas(path):
 
     archivo = open(path, encoding="utf16", errors="ignore")
@@ -34,7 +33,6 @@ def cordenadas(path):
 
     return barco, barco2,barco3,barco4
 
-
 def cargar():
     entrada = ""
     posciciones = [[],[]]
@@ -49,7 +47,6 @@ def cargar():
 
 def jugar():
     print("ya estan jugando")
-
 
 while True:
 

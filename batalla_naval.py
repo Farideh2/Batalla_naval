@@ -1,8 +1,52 @@
 opcion = ""
 
+
+def cordenadas(path):
+
+    archivo = open(path, encoding="utf16", errors="ignore")
+    cont3 = 0
+    lector = ""
+    final=[]
+
+    lector = archivo.read()
+    final = lector.split()
+    
+    barco, barco2, barco3, barco4 = [],[],[],[]
+
+    for cont3 in range(len(final)):
+
+        y = 0
+        x = 0
+
+        y = int(cont3/10)
+        x = int(round(((cont3/10)-y)*10))
+
+        print(cont3/10,y,(cont3/10)-y,x)
+
+        if final[cont3]=="1":
+            barco.append([x+1,y+1])
+        elif final[cont3]=="2":
+            barco2.append([x+1,y+1])
+        elif final[cont3]=="3":
+            barco3.append([x+1,y+1])
+        if final[cont3]=="4":
+            print(x+1,y+1)
+            barco4.append([x+1,y+1])
+        print("barco 1:",barco)
+        print("barco 2:",barco2)
+        print ("barco 3:",barco3) 
+        print("barco 4:" ,barco4)
+
+    return 
+
+
 def cargar():
+    entrada = ""
+    posciciones = [[],[]]
     for cont in range(0,2):
         print("por favor suba el archivo del jugador #",cont+1)
+        entrada = input()
+        posciciones[cont]=cordenadas(entrada)
         print("se ha subido de manera exitosa el archivo")
     print("gracias por subir los archivos, regresandolo al menu")
 

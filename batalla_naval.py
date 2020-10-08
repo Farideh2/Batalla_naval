@@ -1,4 +1,5 @@
 opcion = ""
+coordenadas = []
 
 def cordenadas(path):
 
@@ -44,8 +45,10 @@ def cargar():
         print(posciciones[cont][cont2])
         print("se ha subido de manera exitosa el archivo")
     print("gracias por subir los archivos, regresandolo al menu")
+    return posciciones
 
-def jugar():
+def jugar(coordenadas):
+    
     print("ya estan jugando")
 
 while True:
@@ -56,11 +59,14 @@ while True:
     print("c)terminar")
     
     opcion = input()
+    print(coordenadas)
 
     if opcion == "a":
-        cargar()
+        coordenadas = cargar()
+
     elif opcion == "b":
-        jugar()
+        jugar(coordenadas)
+
     elif opcion == "c":
         break
     else:

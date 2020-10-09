@@ -38,27 +38,35 @@ def cargar():
     entrada = ""
     posciciones = [[],[]]
     cont2 = 0
-    for cont in range(0,2):
-        print("por favor suba el archivo del jugador #",cont+1)
+    while True:
+        print("por favor suba el archivo del jugador #",cont2+1)
         entrada = input()
-        posciciones[cont]=cordenadas(entrada)
-        print("se ha subido de manera exitosa el archivo")
+        try:
+            posciciones[cont2]=cordenadas(entrada)
+            print("se ha subido de manera exitosa el archivo")
+            cont2 += 1
+            if cont2 == 2: break
+        except FileNotFoundError:
+            print("por favor vuelvalo a subir")
+
     print("gracias por subir los archivos, regresandolo al menu")
     return posciciones
 
-def jugador(coordenadas):
+def jugador(koordinaten):
     p = input("ingrese donde quiere atacar: ")
-    player = p1.split(",")
+    player = p.split(",")
 
-    if p in coordenadas[int(player[0])][int(player[1])]:
+    if player == koordinaten[int(player[0])][int(player[1])]:
         print("acertaste")
     else:
         print("fallaste")
 
-def jugar(coordenadas):
-    jugador1 = cordenadas[0]
-    jugador2 = cordenadas[1]
+def jugar(coordinates):
+    jugador1 = coordinates[0]
+    jugador2 = coordinates[1]
+    print(jugador1,jugador2)
 
+    jugador(jugador2)
     jugador(jugador1)
 
 while True:
@@ -69,7 +77,6 @@ while True:
     print("c)terminar")
     
     opcion = input()
-    print(coordenadas)
 
     if opcion == "a":
         coordenadas = cargar()

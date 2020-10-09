@@ -1,5 +1,7 @@
-opcion = ""
+opcion,p = "",""
 coordenadas = []
+jugador1, jugador2 = [],[]
+player = 0
 
 def cordenadas(path):
 
@@ -28,9 +30,7 @@ def cordenadas(path):
         elif final[cont3]=="3":
             barco3.append([x+1,y+1])
         if final[cont3]=="4":
-            print(x+1,y+1)
             barco4.append([x+1,y+1])
-
 
     return barco, barco2,barco3,barco4
 
@@ -42,14 +42,24 @@ def cargar():
         print("por favor suba el archivo del jugador #",cont+1)
         entrada = input()
         posciciones[cont]=cordenadas(entrada)
-        print(posciciones[cont][cont2])
         print("se ha subido de manera exitosa el archivo")
     print("gracias por subir los archivos, regresandolo al menu")
     return posciciones
 
+def jugador(coordenadas):
+    p = input("ingrese donde quiere atacar: ")
+    player = p1.split(",")
+
+    if p in coordenadas[int(player[0])][int(player[1])]:
+        print("acertaste")
+    else:
+        print("fallaste")
+
 def jugar(coordenadas):
-    
-    print("ya estan jugando")
+    jugador1 = cordenadas[0]
+    jugador2 = cordenadas[1]
+
+    jugador(jugador1)
 
 while True:
 

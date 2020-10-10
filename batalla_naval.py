@@ -35,12 +35,16 @@ def cordenadas(path):
     return barco, barco2,barco3,barco4
 
 def cargar():
+
     entrada = ""
     posciciones = [[],[]]
     cont2 = 0
+
+    #loop para subir los archivos
     while True:
         print("por favor suba el archivo del jugador #",cont2+1)
         entrada = input()
+        #use el try para 
         try:
             posciciones[cont2]=cordenadas(entrada)
             print("se ha subido de manera exitosa el archivo")
@@ -55,14 +59,20 @@ def cargar():
 def jugador(koordinaten):
     p = input("ingrese donde quiere atacar: ")
     player = p.split(",")
-    print(p, player)
 
-    if player == koordinaten[int(player[0])][int(player[1])]:
+    x = int(player[0])
+    y = int(player[1])
+
+    print(x,y)
+
+
+    if player in koordinaten:
         print("acertaste")
     else:
         print("fallaste")
 
 def jugar(coordinates):
+
     jugador1 = coordinates[0]
     jugador2 = coordinates[1]
     print(jugador1,jugador2)
@@ -71,7 +81,7 @@ def jugar(coordinates):
     jugador(jugador1)
 
 while True:
-
+    #menu de opciones
     print("Escoga una opcion")
     print("a)carga de archivos")
     print("b)jugar")

@@ -55,6 +55,7 @@ def cargar():
 def jugador(koordinaten):
     p = input("ingrese donde quiere atacar: ")
     player = p.split(",")
+    print(p, player)
 
     if player == koordinaten[int(player[0])][int(player[1])]:
         print("acertaste")

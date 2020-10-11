@@ -57,19 +57,20 @@ def cargar():
     return posciciones
 
 def jugador(koordinaten):
+    print(koordinaten)
+
     p = input("ingrese donde quiere atacar: ")
     player = p.split(",")
+    cont2,cont3 = 0,0
 
-    x = int(player[0])
-    y = int(player[1])
-
-    print(x,y)
-
-
-    if player in koordinaten:
-        print("acertaste")
-    else:
-        print("fallaste")
+    for cont2 in range(len(koordinaten)):
+        for cont3 in range(len(koordinaten[cont2])):
+            print(cont3)
+            if player == koordinaten[cont2][cont3]:
+                print("acertaste")
+                break
+            if cont3 == len(koordinaten[cont2])-1:
+                print("fallaste")
 
 def jugar(coordinates):
 

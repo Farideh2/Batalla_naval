@@ -3,36 +3,20 @@ coordenadas = []
 jugador1, jugador2 = [],[]
 player = 0
 
-def cordenadas(path):
+def corde(path):
 
     archivo = open(path, encoding="utf16", errors="ignore")
     cont3 = 0
     lector = ""
     final=[]
+    posc = []
 
-    lector = archivo.read()
-    final = lector.split()
+    for cont3 in range(10):
+        lector= archivo.readline()
+        final.append(lector.split())
     
-    barco, barco2, barco3, barco4 = [],[],[],[]
-
-    for cont3 in range(len(final)):
-
-        y = 0
-        x = 0
-
-        y = int(cont3/10)
-        x = int(round(((cont3/10)-y)*10))
-
-        if final[cont3]=="1":
-            barco.append([x+1,y+1])
-        elif final[cont3]=="2":
-            barco2.append([x+1,y+1])
-        elif final[cont3]=="3":
-            barco3.append([x+1,y+1])
-        if final[cont3]=="4":
-            barco4.append([x+1,y+1])
-
-    return barco, barco2,barco3,barco4
+    for cont3 in range(10):
+        print(final[cont3])
 
 def cargar():
 
@@ -46,7 +30,7 @@ def cargar():
         entrada = input()
         #use el try para 
         try:
-            posciciones[cont2]=cordenadas(entrada)
+            posciciones[cont2]=corde(entrada)
             print("se ha subido de manera exitosa el archivo")
             cont2 += 1
             if cont2 == 2: break
@@ -54,6 +38,7 @@ def cargar():
             print("por favor vuelvalo a subir")
 
     print("gracias por subir los archivos, regresandolo al menu")
+    print(posciciones)
     return posciciones
 
 def jugador(koordinaten):
@@ -65,8 +50,8 @@ def jugador(koordinaten):
 
     for cont2 in range(len(koordinaten)):
         for cont3 in range(len(koordinaten[cont2])):
-            print(cont3)
-            if player == koordinaten[cont2][cont3]:
+            print(cont2,cont3)
+            if player[0] == koordinaten[cont2][cont3][0] and player[1] == koordinaten[cont2][cont3][1]:
                 print("acertaste")
                 break
             if cont3 == len(koordinaten[cont2])-1:
@@ -94,6 +79,9 @@ while True:
         coordenadas = cargar()
 
     elif opcion == "b":
+        for cont in range(len(coordenadas)):
+            print(coordenadas[cont])
+
         jugar(coordenadas)
 
     elif opcion == "c":

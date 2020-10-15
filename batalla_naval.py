@@ -2,6 +2,18 @@ opcion,p = "",""
 coordenadas = []
 jugador1, jugador2 = [],[]
 player = 0
+visible1, visible2 = [],[]
+victoria = 0
+
+for i in range(0,10):
+    visible1.append(["?","?","?","?","?","?","?","?","?","?"])
+    visible2.append(["?","?","?","?","?","?","?","?","?","?"])
+
+def printear(array):
+    j = 0
+
+    for j in range(len(array)):
+        print(array[j])
 
 def corde(path):
 
@@ -39,26 +51,52 @@ def cargar():
     print("gracias por subir los archivos, regresandolo al menu")
     return posciciones
 
-def jugador(koordinaten):
-    print(koordinaten)
-
+def jugador(koordinaten,jugador):
     p = input("ingrese donde quiere atacar: ")
     player = p.split(",")
-    cont2,cont3 = 0,0
     barcos = [1,2,3,4]
 
-    if "1"or "2"or "3" or "4" in koordinaten[int(player[0])][int(player[1])] :
+    global victoria1, victoria2
+    victoria1,victoria2 = 0,0
+
+    if "1"or "2"or "3" or "4" in koordinaten[int(player[1])][int(player[0])] :
         print("acertaste")
+        if jugador == 1: 
+            victoria1 += 1
+            visible1[int(player[0])][int(player[1])] = "x"
+            printear(visible1)
+        else: 
+            victoria2 += 1
+            visible2[int(player[0])][int(player[1])] = "x"
+            printear(visible2)
+
     else:
         print("fallaste")
+        if jugador == 1: 
+            visible1[int(player[0])][int(player[1])] = "0"
+            printear(visible1)
+        else: 
+            visible2[int(player[0])][int(player[1])] = "0"
+            printear(visible2)
 
+    if jugador == 1: return victoria1 
+    else: return victoria2
+    
 def jugar(coordinates):
 
     jugador1 = coordinates[0]
     jugador2 = coordinates[1]
 
-    jugador(jugador2)
-    jugador(jugador1)
+    while True:
+        victoria = jugador(jugador2,1)
+        if victoria == 10:
+            print("gano jugador 1")
+            break
+
+        victoria = jugador(jugador1,2)
+        if victoria == 10:
+            print("gano jugador 1")
+            break
 
 while True:
     #menu de opciones

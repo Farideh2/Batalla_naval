@@ -5,9 +5,13 @@ player = 0
 visible1, visible2 = [],[]
 victoria = 0
 
+visible1.append(["0","1","2","3","4","5","6","7","8","9","10"])
+visible2.append(["0","1","2","3","4","5","6","7","8","9","10"])
+
 for i in range(0,10):
-    visible1.append(["?","?","?","?","?","?","?","?","?","?"])
-    visible2.append(["?","?","?","?","?","?","?","?","?","?"])
+    indice = str(i)+1
+    visible1.append([indice,"_","_","_","_","_","_","_","_","_","_"])
+    visible2.append([indice,"_","_","_","_","_","_","_","_","_","_"])
 
 def printear(array):
     j = 0
@@ -52,51 +56,58 @@ def cargar():
     return posciciones
 
 def jugador(koordinaten,jugador):
-    p = input("ingrese donde quiere atacar: ")
+    mensaje = "ingrese donde quiere atacar jugador #"+str(jugador)+": "
+    p = input(mensaje)
     player = p.split(",")
-    barcos = [1,2,3,4]
 
-    global victoria1, victoria2
-    victoria1,victoria2 = 0,0
+    x = int(player[0])
+    y = int(player[1])
 
-    if "1"or "2"or "3" or "4" in koordinaten[int(player[1])][int(player[0])] :
+    global victory
+    victory = 0
+
+    if "1" in koordinaten[y][x] or "2" in koordinaten[y][x] or "3" in koordinaten[y][x] or "4" in koordinaten[y][x]:
         print("acertaste")
         if jugador == 1: 
             victoria1 += 1
-            visible1[int(player[0])][int(player[1])] = "x"
+            visible1[y][x] = "x"
             printear(visible1)
         else: 
-            victoria2 += 1
-            visible2[int(player[0])][int(player[1])] = "x"
+            victoria1 += 1
+            visible2[y][x] = "x"
             printear(visible2)
 
     else:
         print("fallaste")
         if jugador == 1: 
-            visible1[int(player[0])][int(player[1])] = "0"
+            visible1[y][x] = "0"
             printear(visible1)
         else: 
-            visible2[int(player[0])][int(player[1])] = "0"
+            visible2[y][x] = "0"
             printear(visible2)
 
-    if jugador == 1: return victoria1 
-    else: return victoria2
+    return victory
     
 def jugar(coordinates):
+
+    victoria1, victoria2 = 0,0
 
     jugador1 = coordinates[0]
     jugador2 = coordinates[1]
 
     while True:
         victoria = jugador(jugador2,1)
-        if victoria == 10:
-            print("gano jugador 1")
-            break
+        if victoria == 1:
+            victoria1 += 1
+            if victoria1 == 12:
+                print("gano el jugador #1")
+            
 
         victoria = jugador(jugador1,2)
-        if victoria == 10:
-            print("gano jugador 1")
-            break
+        if victoria == 1:
+            victoria2 += 1
+            if victoria1 == 12:
+                print("gano el jugador #2")
 
 while True:
     #menu de opciones

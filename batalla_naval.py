@@ -4,7 +4,6 @@ jugador1, jugador2 = [],[]
 player = 0
 visible1, visible2 = [],[]
 
-
 visible1.append(["0","1","2","3","4","5","6","7","8","9","10"])
 visible2.append(["0","1","2","3","4","5","6","7","8","9","10"])
 
@@ -69,11 +68,11 @@ def jugador(koordinaten,jugador):
     if "1" in koordinaten[y][x] or "2" in koordinaten[y][x] or "3" in koordinaten[y][x] or "4" in koordinaten[y][x]:
         print("acertaste")
         if jugador == 1: 
-            victoria1 += 1
+            victory += 1
             visible1[y][x] = "x"
             printear(visible1)
         else: 
-            victoria1 += 1
+            victory += 1
             visible2[y][x] = "x"
             printear(visible2)
 

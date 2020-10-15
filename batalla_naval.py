@@ -3,7 +3,7 @@ coordenadas = []
 jugador1, jugador2 = [],[]
 player = 0
 visible1, visible2 = [],[]
-victoria = 0
+
 
 visible1.append(["0","1","2","3","4","5","6","7","8","9","10"])
 visible2.append(["0","1","2","3","4","5","6","7","8","9","10"])
@@ -91,6 +91,7 @@ def jugador(koordinaten,jugador):
 def jugar(coordinates):
 
     victoria1, victoria2 = 0,0
+    victoria = 0
 
     jugador1 = coordinates[0]
     jugador2 = coordinates[1]

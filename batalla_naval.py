@@ -21,10 +21,8 @@ def printear(array):
 def corde(path):
 
     archivo = open(path, encoding="utf16", errors="ignore")
-    cont3 = 0
     lector = ""
     final=[]
-    posc = []
 
     for cont3 in range(10):
         lector= archivo.readline()
@@ -54,7 +52,7 @@ def cargar():
     print("gracias por subir los archivos, regresandolo al menu")
     return posciciones
 
-def jugador(koordinaten,jugador):
+def jugador(koordinaten,jugador, barcos):
     mensaje = "ingrese donde quiere atacar jugador #"+str(jugador)+": "
     p = input(mensaje)
     player = p.split(",")
@@ -65,16 +63,57 @@ def jugador(koordinaten,jugador):
     global victory
     victory = 0
 
-    if "1" in koordinaten[y][x] or "2" in koordinaten[y][x] or "3" in koordinaten[y][x] or "4" in koordinaten[y][x]:
+    if "1" in koordinaten[y-1][x-1] :
         print("acertaste")
+        barcos[0] -= 1
         if jugador == 1: 
-            victory += 1
             visible1[y][x] = "x"
             printear(visible1)
         else: 
-            victory += 1
             visible2[y][x] = "x"
             printear(visible2)
+        
+        if barcos[0]== 0:
+            print("hundiste el barco 1")
+
+    elif "2" in koordinaten[y-1][x-1]:
+        print("acertaste")
+        barcos[1] -= 1
+        if jugador == 1: 
+            visible1[y][x] = "x"
+            printear(visible1)
+        else: 
+            visible2[y][x] = "x"
+            printear(visible2)
+        
+        if barcos[1]== 0:
+            print("hundiste el barco 2")
+
+    elif "3" in koordinaten[y-1][x-1]:
+        print("acertaste")
+        barcos[2] -= 1
+        if jugador == 1: 
+            visible1[y][x] = "x"
+            printear(visible1)
+        else: 
+            visible2[y][x] = "x"
+            printear(visible2)
+        
+        if barcos[2]== 0:
+            print("hundiste el barco 3")
+        
+    elif "4" in koordinaten[y-1][x-1]:
+        print("acertaste")
+        barcos[3] -= 1
+        if jugador == 1: 
+            visible1[y][x] = "x"
+            printear(visible1)
+        else: 
+            visible2[y][x] = "x"
+            printear(visible2)
+        
+        if barcos[3]== 0:
+            print("hundiste el barco 3")
 
     else:
         print("fallaste")
@@ -84,31 +123,29 @@ def jugador(koordinaten,jugador):
         else: 
             visible2[y][x] = "0"
             printear(visible2)
+        
 
-    return victory
+    return barcos
     
 def jugar(coordinates):
 
-    victoria1, victoria2 = 0,0
-    victoria = 0
+    barcos1, barcos2 = [2,3,4,5],[2,3,4,5]
 
     jugador1 = coordinates[0]
     jugador2 = coordinates[1]
 
     while True:
-        victoria = jugador(jugador2,1)
-        if victoria == 1:
-            victoria1 += 1
-            if victoria1 == 12:
-                print("gano el jugador #1")
-            
+        victoria1 = jugador(jugador2,1, barcos1)
+        print(victoria1)
+        if sum(victoria1) == 0:
+            print("gano el jugador 1")
+            break
 
-        victoria = jugador(jugador1,2)
-        if victoria == 1:
-            victoria2 += 1
-            if victoria1 == 12:
-                print("gano el jugador #2")
-
+        victoria2 = jugador(jugador1,2, barcos2)
+        if sum(victoria2) == 0:
+            print("gano el jugador 1")
+            break
+        
 while True:
     #menu de opciones
     print("Escoga una opcion")

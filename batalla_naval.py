@@ -1,8 +1,16 @@
+import simpleaudio as sa
+
 opcion,p = "",""
 coordenadas = []
 jugador1, jugador2 = [],[]
 player = 0
 visible1, visible2 = [],[]
+
+explosion = "Explosion+9.wav"
+explosionObj = sa.WaveObject.from_wave_file(explosion)
+
+chapoteo = "Cannonball-Splash-A2-www.fesliyanstudios.com (online-audio-converter.com).wav"
+chapoteoObj = sa.WaveObject.from_wave_file(chapoteo)
 
 visible1.append(["0","1","2","3","4","5","6","7","8","9","10"])
 visible2.append(["0","1","2","3","4","5","6","7","8","9","10"])
@@ -75,6 +83,8 @@ def jugador(koordinaten,jugador, barcos):
         
         if barcos[0]== 0:
             print("hundiste el barco 1")
+            playExp = explosionObj.play()
+            playExp.wait_done()
 
     elif "2" in koordinaten[y-1][x-1]:
         print("acertaste")
@@ -88,6 +98,8 @@ def jugador(koordinaten,jugador, barcos):
         
         if barcos[1]== 0:
             print("hundiste el barco 2")
+            playExp = explosionObj.play()
+            playExp.wait_done()
 
     elif "3" in koordinaten[y-1][x-1]:
         print("acertaste")
@@ -101,6 +113,8 @@ def jugador(koordinaten,jugador, barcos):
         
         if barcos[2]== 0:
             print("hundiste el barco 3")
+            playExp = explosionObj.play()
+            playExp.wait_done()
         
     elif "4" in koordinaten[y-1][x-1]:
         print("acertaste")
@@ -113,16 +127,22 @@ def jugador(koordinaten,jugador, barcos):
             printear(visible2)
         
         if barcos[3]== 0:
-            print("hundiste el barco 3")
+            print("hundiste el barco 4")
+            playExp = explosionObj.play()
+            playExp.wait_done()
 
     else:
         print("fallaste")
         if jugador == 1: 
             visible1[y][x] = "0"
             printear(visible1)
+            playExp = chapoteoObj.play()
+            playExp.wait_done()
         else: 
             visible2[y][x] = "0"
             printear(visible2)
+            playExp = chapoteoObj.play()
+            playExp.wait_done()
         
 
     return barcos
@@ -136,7 +156,6 @@ def jugar(coordinates):
 
     while True:
         victoria1 = jugador(jugador2,1, barcos1)
-        print(victoria1)
         if sum(victoria1) == 0:
             print("gano el jugador 1")
             break

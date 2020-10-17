@@ -1,7 +1,7 @@
 import simpleaudio as sa
 
 opcion,p = "",""
-coordenadas = []
+coordenadas,ships = [],[]
 jugador1, jugador2 = [],[]
 player = 0
 visible1, visible2 = [],[]
@@ -31,26 +31,43 @@ def corde(path):
     archivo = open(path, encoding="utf16", errors="ignore")
     lector = ""
     final=[]
+    barcos = [0,0,0,0]
 
     for cont3 in range(10):
-        lector= archivo.readline()
-        final.append(lector.split())
 
-    return final
+        lector= archivo.readline()
+        temp = lector.split()
+        final.append(temp)
+
+        for l in range(len(temp)):
+            if "1" in temp[l]:
+                barcos[0] = barcos[0]+1
+            if "2" in temp[l]:
+                barcos[1] = barcos[1]+1
+            if "3" in temp[l]:
+                barcos[2] = barcos[2]+1
+            if "4" in temp[l]:
+                barcos[3] = barcos[3]+1
+
+    return final, barcos
 
 def cargar():
 
     entrada = ""
     posciciones = []
     cont2 = 0
+    naves = []
 
     #loop para subir los archivos
     while True:
         print("por favor suba el archivo del jugador #",cont2+1)
+
         entrada = input()
         #use el try para 
         try:
-            posciciones.append(corde(entrada))
+            temp = corde(entrada)
+            posciciones.append(temp[0])
+            naves.append(temp[1])
             print("se ha subido de manera exitosa el archivo")
             cont2 += 1
             if cont2 == 2: break
@@ -58,7 +75,7 @@ def cargar():
             print("por favor vuelvalo a subir")
 
     print("gracias por subir los archivos, regresandolo al menu")
-    return posciciones
+    return posciciones,naves
 
 def jugador(koordinaten,jugador, barcos):
     mensaje = "ingrese donde quiere atacar jugador #"+str(jugador)+": "
@@ -72,7 +89,7 @@ def jugador(koordinaten,jugador, barcos):
     victory = 0
 
     if "1" in koordinaten[y-1][x-1] :
-        print("acertaste")
+        print("Averiado")
         barcos[0] -= 1
         if jugador == 1: 
             visible1[y][x] = "x"
@@ -82,7 +99,7 @@ def jugador(koordinaten,jugador, barcos):
             printear(visible2)
         
         if barcos[0]== 0:
-            print("hundiste el barco 1")
+            print("Hundido")
             playExp = explosionObj.play()
             playExp.wait_done()
 
@@ -147,9 +164,10 @@ def jugador(koordinaten,jugador, barcos):
 
     return barcos
     
-def jugar(coordinates):
+def jugar(coordinates, botes):
 
-    barcos1, barcos2 = [2,3,4,5],[2,3,4,5]
+    barcos1, barcos2 = botes[0],botes[1]
+    print(barcos1, barcos2)
 
     jugador1 = coordinates[0]
     jugador2 = coordinates[1]
@@ -175,10 +193,11 @@ while True:
     opcion = input()
 
     if opcion == "a":
-        coordenadas = cargar()
+        coordenadas, ships = cargar()
+        print(ships)
 
     elif opcion == "b":
-        jugar(coordenadas)
+        jugar(coordenadas, ships)
 
     elif opcion == "c":
         break

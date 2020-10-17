@@ -1,4 +1,5 @@
 import simpleaudio as sa
+import chardet as ch
 
 opcion,p = "",""
 coordenadas,ships = [],[]
@@ -28,15 +29,20 @@ def printear(array):
 
 def corde(path):
 
-    archivo = open(path, encoding="utf16", errors="ignore")
+    archivo8 = open(path, encoding = "utf8")
+    archivo = open(path ,encoding = "utf16", errors="ignore")
     lector = ""
     final=[]
     barcos = [0,0,0,0]
 
     for cont3 in range(10):
-
-        lector= archivo.readline()
-        temp = lector.split()
+        try:
+            lector = archivo.readline()
+        except UnicodeError:
+            lector = archivo8.readline()
+            print("hola")
+        
+        temp = lector.split(" ")
         final.append(temp)
 
         for l in range(len(temp)):
@@ -48,7 +54,8 @@ def corde(path):
                 barcos[2] = barcos[2]+1
             if "4" in temp[l]:
                 barcos[3] = barcos[3]+1
-
+    print (barcos)
+    printear(final)
     return final, barcos
 
 def cargar():
@@ -161,7 +168,7 @@ def jugador(koordinaten,jugador, barcos):
             playExp = chapoteoObj.play()
             playExp.wait_done()
         
-
+    print(barcos)
     return barcos
     
 def jugar(coordinates, botes):

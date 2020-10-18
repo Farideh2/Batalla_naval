@@ -1,3 +1,6 @@
+#creado por rigel de jesus
+#a01285156
+
 #se importa simpleaudioo para los sonidos
 import simpleaudio as sa
 
@@ -108,86 +111,103 @@ def cargar():
 #este metodo se corre cada vez que que los jugadrores quieran jugar y es donde se efectua el juego
 def jugador(koordinaten,jugador, barcos):
     mensaje = "ingrese donde quiere atacar jugador #"+str(jugador)+": "
-    p = input(mensaje)
-    player = p.split(",")
-
-    x = int(player[0])
-    y = int(player[1])
+    
 
     global victory
     victory = 0
 
-    if visible1[y][x] == "0" or visible1[y][x] == "0":
-        print("Esa coordenada ya se añadio")
+    #se usa el while para repitirt el input si es que la coordenada ya se añadio
+    while True:
+        p = input(mensaje)
+        player = p.split(",")
 
-    elif "1" in koordinaten[y-1][x-1] :
-        print("Averiado")
-        barcos[0] -= 1
-        if jugador == 1: 
-            visible1[y][x] = "x"
-            printear(visible1)
-        else: 
-            visible2[y][x] = "x"
-            printear(visible2)
+        x = int(player[0])
+        y = int(player[1])
         
-        if barcos[0]== 0:
-            print("Hundido")
-            playExp = explosionObj.play()
+        #checa si la coordenada ya se añadio
+        if jugador == 1  and (visible1[y][x] == "x" or visible1[y][x] == "0"):
+            print("Esa coordenada ya se añadio")
+
+        elif jugador == 2 and (visible2[y][x] == "x" or visible2[y][x] == "0"):
+            print("esta coordenada ya se añadio")
+
+        #aqui checa si impacto o no (es lo mismo en el resto de elif)
+        elif "1" in koordinaten[y-1][x-1] :
+            print("Averiado")
+            barcos[0] -= 1
+            if jugador == 1: 
+                visible1[y][x] = "x"
+                printear(visible1)
+            else: 
+                visible2[y][x] = "x"
+                printear(visible2)
+            
+            if barcos[0]== 0:
+                print("Hundido")
+                #reporduce el sonido de un barco hundiendose
+                playExp = explosionObj.play()
+            break
 
 
-    elif "2" in koordinaten[y-1][x-1]:
-        print("acertaste")
-        barcos[1] -= 1
-        if jugador == 1: 
-            visible1[y][x] = "x"
-            printear(visible1)
-        else: 
-            visible2[y][x] = "x"
-            printear(visible2)
+        elif "2" in koordinaten[y-1][x-1]:
+            print("acertaste")
+            barcos[1] -= 1
+            if jugador == 1: 
+                visible1[y][x] = "x"
+                printear(visible1)
+            else: 
+                visible2[y][x] = "x"
+                printear(visible2)
+            
+            if barcos[1]== 0:
+                print("hundiste el barco 2")
+                playExp = explosionObj.play()
+            break
+
+
+        elif "3" in koordinaten[y-1][x-1]:
+            print("acertaste")
+            barcos[2] -= 1
+            if jugador == 1: 
+                visible1[y][x] = "x"
+                printear(visible1)
+            else: 
+                visible2[y][x] = "x"
+                printear(visible2)
+            
+            if barcos[2]== 0:
+                print("hundiste el barco 3")
+                playExp = explosionObj.play()
+            break
+            
+        elif "4" in koordinaten[y-1][x-1]:
+            print("acertaste")
+            barcos[3] -= 1
+            if jugador == 1: 
+                visible1[y][x] = "x"
+                printear(visible1)
+            else: 
+                visible2[y][x] = "x"
+                printear(visible2)
+            
+            if barcos[3]== 0:
+                print("hundiste el barco 4")
+                playExp = explosionObj.play()
+            break
         
-        if barcos[1]== 0:
-            print("hundiste el barco 2")
-            playExp = explosionObj.play()
-
-
-    elif "3" in koordinaten[y-1][x-1]:
-        print("acertaste")
-        barcos[2] -= 1
-        if jugador == 1: 
-            visible1[y][x] = "x"
-            printear(visible1)
-        else: 
-            visible2[y][x] = "x"
-            printear(visible2)
-        
-        if barcos[2]== 0:
-            print("hundiste el barco 3")
-            playExp = explosionObj.play()
-        
-    elif "4" in koordinaten[y-1][x-1]:
-        print("acertaste")
-        barcos[3] -= 1
-        if jugador == 1: 
-            visible1[y][x] = "x"
-            printear(visible1)
-        else: 
-            visible2[y][x] = "x"
-            printear(visible2)
-        
-        if barcos[3]== 0:
-            print("hundiste el barco 4")
-            playExp = explosionObj.play()
-
-    else:
-        print("fallaste")
-        if jugador == 1: 
-            visible1[y][x] = "0"
-            printear(visible1)
-            playExp = chapoteoObj.play()
-        else: 
-            visible2[y][x] = "0"
-            printear(visible2)
-            playExp = chapoteoObj.play()
+        #indica si fallo
+        else:
+            print("fallaste")
+            if jugador == 1: 
+                visible1[y][x] = "0"
+                printear(visible1)
+                #reproduce el sonido de un fallo (chapoteo en el agua)
+                playExp = chapoteoObj.play()
+            else: 
+                visible2[y][x] = "0"
+                printear(visible2)
+                playExp = chapoteoObj.play()
+            break
         
     print(barcos)
     return barcos
@@ -217,7 +237,7 @@ def jugar(coordinates, botes):
             print("gano el jugador 1")
             break
 
-
+#el menu de opciones de el programa
 while True:
     #menu de opciones
     print("Escoga una opcion")

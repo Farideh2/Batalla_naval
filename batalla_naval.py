@@ -244,13 +244,20 @@ while True:
     print("a)carga de archivos")
     print("b)jugar")
     print("c)terminar")
+
+    #se usa esta variable para checar si ya se subio el archivo o no
+    carga = 0
     
     opcion = input()
 
     if opcion == "a":
         coordenadas, ships = cargar()
+        cargar = 1
     elif opcion == "b":
-        jugar(coordenadas, ships)
+        if carga == 1:
+            jugar(coordenadas, ships)
+        else:
+            print("por favor primero suba los archivos")
 
     elif opcion == "c":
         break

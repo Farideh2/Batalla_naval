@@ -34,15 +34,21 @@ def corde(path):
     lector = ""
     final=[]
     barcos = [0,0,0,0]
+    checar = 0
 
     for cont3 in range(10):
-        try:
-            lector = archivo.readline()
-        except UnicodeError:
-            lector = archivo8.readline()
-            print("hola")
+        if checar == 0:
+            try:
+                lector = archivo.readline()
+                checar = 1
+            except:
+                lector = archivo8.readline()
+                print("hola")
+                checar = 2
+        elif checar ==1: lector = archivo.readline()
+        else:lector = archivo8.readline()
         
-        temp = lector.split(" ")
+        temp = lector.split()
         final.append(temp)
 
         for l in range(len(temp)):
@@ -108,7 +114,7 @@ def jugador(koordinaten,jugador, barcos):
         if barcos[0]== 0:
             print("Hundido")
             playExp = explosionObj.play()
-            playExp.wait_done()
+
 
     elif "2" in koordinaten[y-1][x-1]:
         print("acertaste")
@@ -123,7 +129,7 @@ def jugador(koordinaten,jugador, barcos):
         if barcos[1]== 0:
             print("hundiste el barco 2")
             playExp = explosionObj.play()
-            playExp.wait_done()
+
 
     elif "3" in koordinaten[y-1][x-1]:
         print("acertaste")
@@ -138,7 +144,6 @@ def jugador(koordinaten,jugador, barcos):
         if barcos[2]== 0:
             print("hundiste el barco 3")
             playExp = explosionObj.play()
-            playExp.wait_done()
         
     elif "4" in koordinaten[y-1][x-1]:
         print("acertaste")
@@ -153,7 +158,6 @@ def jugador(koordinaten,jugador, barcos):
         if barcos[3]== 0:
             print("hundiste el barco 4")
             playExp = explosionObj.play()
-            playExp.wait_done()
 
     else:
         print("fallaste")
@@ -161,12 +165,10 @@ def jugador(koordinaten,jugador, barcos):
             visible1[y][x] = "0"
             printear(visible1)
             playExp = chapoteoObj.play()
-            playExp.wait_done()
         else: 
             visible2[y][x] = "0"
             printear(visible2)
             playExp = chapoteoObj.play()
-            playExp.wait_done()
         
     print(barcos)
     return barcos

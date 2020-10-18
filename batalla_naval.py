@@ -210,7 +210,6 @@ def jugador(koordinaten,jugador, barcos):
                     playExp = explosion_obj.play()
                 break
             
-
             #indica si fallo
             else:
                 print("fallaste")
@@ -232,7 +231,7 @@ def jugador(koordinaten,jugador, barcos):
 def jugar(coordinates, botes):
 
     #aqui se declaran cuantos barcos ahi de cada tipo y de que jugadores
-    barcos1, barcos2 = botes[0],botes[1]
+    barcos1, barcos2 = botes[1],botes[0]
 
     #tambien se indica que  las matrizas y los jugadores a los que les pertenece
     jugador1 = coordinates[0]
@@ -257,7 +256,6 @@ def jugar(coordinates, botes):
         validar = input("Quieres seguir jugando? (s or n): ")
         if validar.lower() == "n":
             break
-
 
 #el menu de opciones de el programa
 while True:

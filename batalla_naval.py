@@ -1,6 +1,7 @@
 #creado por rigel de jesus
 #a01285156
 
+#nota del autor, es comun ver sinonimos como nombres de varianbles similares
 #se importa simpleaudioo para los sonidos
 import simpleaudio as sa
 
@@ -50,6 +51,7 @@ def corde(path):
 
     #se declaran las variables necesarias
     lector = ""
+    #final es abreviacion para matriz final pero para evitar nombres largos la abrevie
     final=[]
     barcos = [0,0,0,0]
     checar = 0
@@ -128,9 +130,13 @@ def jugador(koordinaten,jugador, barcos):
 
             x = int(player[0])
             y = int(player[1])
-            
+
+            if x > 10 or y > 10 or x < 1 or y < 1:
+                print("ingrese coordenadas del 1 al 10")
+
+         
             #checa si la coordenada ya se añadio
-            if jugador == 1  and (visible1[y][x] == "x" or visible1[y][x] == "0"):
+            elif jugador == 1  and (visible1[y][x] == "x" or visible1[y][x] == "0"):
                 print("Esa coordenada ya se añadio")
 
             elif jugador == 2 and (visible2[y][x] == "x" or visible2[y][x] == "0"):
@@ -204,6 +210,7 @@ def jugador(koordinaten,jugador, barcos):
                     playExp = explosion_obj.play()
                 break
             
+
             #indica si fallo
             else:
                 print("fallaste")
@@ -230,23 +237,27 @@ def jugar(coordinates, botes):
     #tambien se indica que  las matrizas y los jugadores a los que les pertenece
     jugador1 = coordinates[0]
     jugador2 = coordinates[1]
+    validar = ""
 
     #este metodo se mantiene verdadero hasta que un jugador gane
     #unnjugador gana una vez que se hundan todos los barcos, para eso se resta numeros de la matriz de barcos
     #cada vez que se averia uno hasta que llegue a cero
     while True:
         barcos1 = jugador(jugador2,1,barcos1)
-        print(barcos2)
 
         if sum(barcos1) == 0:
             print("gano el jugador 1")
             break
 
         barcos2 = jugador(jugador1,2, barcos2)
-        print(barcos1)
         if sum(barcos2) == 0:
             print("gano el jugador 1")
             break
+        
+        validar = input("Quieres seguir jugando? (s or n): ")
+        if validar.lower() == "n":
+            break
+
 
 #el menu de opciones de el programa
 while True:
